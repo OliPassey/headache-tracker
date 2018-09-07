@@ -10,11 +10,21 @@ h1{
   padding: 1px 0;
   color: grey;
   font-size: 76;
+  width: 100%
+}
+
+h2{
+  text-align: center;
+  padding: 1px 0;
+  color: grey;
+  font-size: 46;
+  width: 100%;
+  padding: 1px 0;
 }
 
 .container{
   max-width: 900px;
-  margin: 30px auto;
+  margin: 10px auto;
   padding: 0;
 }
 
@@ -33,7 +43,6 @@ div{
   display: inline-block;
   padding: 10px 0;
   margin: 0px auto;
-  width: 100%;
   text-align: center;
   background-color: #043189;
 }
@@ -41,7 +50,6 @@ div{
 .c2{
   display: inline-block;
   float: left;
-  width: 50%;
   text-align: center;
   padding: 10px 0;
   margin: 0px;
@@ -55,7 +63,6 @@ div{
 .c3{
   display: inline-block;
   float: left;
-  width: 50%;
   text-align: center;
   padding: 10px 0;
   background-color: #045085;
@@ -65,7 +72,6 @@ div{
 .c4{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #048089;
@@ -75,7 +81,6 @@ div{
 .c5{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #058E68;
@@ -85,7 +90,6 @@ div{
 .c6{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #06923b;
@@ -95,7 +99,6 @@ div{
 .c7{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #07970C;
@@ -105,7 +108,6 @@ div{
 .c8{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #369B08;
@@ -115,7 +117,6 @@ div{
 .c9{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #6CA00A;
@@ -125,7 +126,6 @@ div{
 .c10{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #A4A40B;
@@ -135,7 +135,6 @@ div{
 .c11{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #A8720C;
@@ -145,7 +144,6 @@ div{
 .c12{
   display: inline-block;
   float: left;
-  width: 33.33%;
   text-align: center;
   padding: 10px 0;
   background-color: #AD3E0D;
@@ -154,7 +152,7 @@ div{
 
 
 
-@media only screen and (max-width: 1200px){
+
   .c1{
     width: 100%;
   }
@@ -191,4 +189,57 @@ div{
   .c12{
     width: 100%;
   }
+}
+
+
+
+.t1{
+  display: inline-block;
+  padding: 10px 0;
+  margin: 0px auto;
+  text-align: center;
+  background-color: #043189;
+  width: 100%;
+  font-size: 52;
+}
+
+.t2{
+  display: inline-block;
+  float: left;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0px;
+  background-color: #043189;
+  font-size: 52;
+  width: 50%;
+}
+
+.t3{
+  display: inline-block;
+  float: left;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #045085;
+  font-size: 52;
+  width: 100%;
+}
+
+.t4{
+  display: inline-block;
+  float: left;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #048089;
+  font-size: 52;
+  width: 100%;
+}
+
+.t5{
+  display: inline-block;
+  float: left;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #058E68;
+  font-size: 52;
+  width: 100%;
 }

@@ -9,6 +9,7 @@
     <img src="invertpain.jpg" width=100%>
   </div>
   <div class="2col">
+  <h2>Pain Tracker</h2>
   <a href="http://10.0.0.19/cluster/0.php"><div class="c2">No Pain</div></a>
   <a href="http://10.0.0.19/cluster/1.php"><div class="c3">1 <br> Pain is very mild, barely noticeable. <br>Most of the time you don’t think about it.</div></a>
   </div>
@@ -26,4 +27,14 @@
     <a href="http://10.0.0.19/cluster/8.php"><div class="c10">8 <br> Intense pain. <br>Physical activity is severely limited. Conversing requires great effort. </div></a>
     <a href="http://10.0.0.19/cluster/9.php"><div class="c11">9 <br> Excruciating pain. <br>Unable to converse. Crying out and/or moaning uncontrollably. </div></a>
     <a href="http://10.0.0.19/cluster/10.php"><div class="c12">10 <br> Unspeakable pain. <br>Bedridden and possibly delirious. Very few people will ever experience this level of pain. </div></a>
+</div>
+<h2>Treatment</h2>
+<div class="2col">
+<a href="http://10.0.0.19/cluster/oxygen-start.php"><div class="t2">Oxygen On</div></a>
+<a href="http://10.0.0.19/cluster/oxygen-stop.php"><div class="t2">Oxygen Off</div></a>
+</div>
+<div class="2col">
+<a href="http://10.0.0.19/cluster/energy-drink-dose.php"><div class="t3">Energy Drink</div></a>
+<a href="http://10.0.0.19/cluster/taurine-500mg.php"><div class="t4">Taurine Supplement 500mg</div></a>
+<a href="http://10.0.0.19/cluster/magnesium-500mg.php"><div class="t5">Magnesium Supplement 500mg</div></a>
 </div>
