@@ -99,10 +99,18 @@ input[type=range]:focus::-ms-fill-upper {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 24px;
 }
 
 .nhs-pain-scale {
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 20px;
+}
+
+button {
+    font-size: 24px;
+    border-radius: 9px;
+    padding: 9px;
+    background-color: purple;
+    color: darkgray;
 }

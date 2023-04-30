@@ -22,7 +22,15 @@ index_html = '''
 </head>
 <body>
         <h1>Cluster Headache Tracker</h1>
-    <form>
+        <img src="{{ url_for('static', filename='logo.png') }}" width="250px" height="250px">
+    <iframe src="https://grafana.passey.cloud/d/n_chIOy4k/cluster-headache?orgId=1&refresh=10s" width="100%" height="700px"></iframe>
+    <div class="annotations">
+        <button type="button" id="energy_drink">Energy Drink</button>
+        <button type="button" id="oxygen_on">Oxygen On</button>
+        <button type="button" id="oxygen_off">Oxygen Off</button>
+        <button type="button" id="sumatriptan">Sumatriptan</button>
+    </div>
+        <form>
         <label for="pain_metric">Pain Metric:</label>
         <input type="range" min="0" max="10" step="1" name="pain_metric" id="pain_metric" value="0">
         <div class="slider-markers">
@@ -40,27 +48,22 @@ index_html = '''
         </div>
     </form>
     <div class="nhs-pain-scale">
-        <h2>NHS Pain Scale:</h2>
+        <h2>CH Pain Scale:</h2>
         <p>0 - Pain free</p>
-        <p>1 - Very minor annoyance - occasional and of short duration</p>
-        <p>2 - Minor annoyance - occasional and of moderate duration</p>
-        <p>3 - Annoying enough to be distracting</p>
-        <p>4 - Can be ignored if you are really involved in your work, but still distracting</p>
-        <p>5 - Can't be ignored for more than 30 minutes</p>
-        <p>6 - Can't be ignored for any length of time, but you can still go to work and participate in social activities</p>
-        <p>7 - Makes it difficult to concentrate, interferes with sleep, you can still function with effort</p>
-        <p>8 - Physical activity severely limited, you can read and converse with effort, can't sleep</p>
+        <p>1 - Very minor annoyance - first signs of an attack starting</p>
+        <p>2 - Minor annoyance - constant mild pain</p>
+        <p>3 - Major distraction - usual work / duties cease</p>
+        <p>4 - Throbbing pain</p>
+        <p>5 - Sharp pain or throbbing pain that causes serious discomfort</p>
+        <p>6 - Pain that takes your breath away, you find it hard to talk or communicate</p>
+        <p>7 - Pain that causes crying, tearing or holding your heading in search of relief</p>
+        <p>8 - Constant unbareable pain with brief moments of lesser pain</p>
         <p>9 - Unable to speak, crying out or moaning uncontrollably - pain makes you pass out</p>
         <p>10 - Unconscious</p>
     </div>
     <br><br>
-    <iframe src="http://10.0.0.54:3000/d/n_chIOy4k/cluster-headache?orgId=1&from=now-30m&to=now&refresh=10s" width="100%" height="500px"></iframe>
-    <div class="annotations">
-        <button type="button" id="energy_drink">Energy Drink</button>
-        <button type="button" id="oxygen_on">Oxygen On</button>
-        <button type="button" id="oxygen_off">Oxygen Off</button>
-        <button type="button" id="sumatriptan">Sumatriptan</button>
-    </div>
+    
+
 
     <script>
         $(document).ready(function() {
@@ -165,6 +168,8 @@ def create_annotation():
     }
 
     data = {
+        "dashboardUid": config['grafana']['dashboard_uid'],
+        "panelId": config['grafana']['panel_id'],
         "time": int(time.time() * 1000),
         "text": annotation,
         "tags": ["treatment"]
@@ -176,6 +181,7 @@ def create_annotation():
         return "Annotation created successfully", 200
     else:
         return f"Error creating annotation: {response.text}", 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
