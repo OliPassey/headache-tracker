@@ -1,4 +1,5 @@
 # headache-tracker
+![image](https://github.com/OliPassey/headache-tracker/blob/master/static/logo.png?raw=true)<br />
 A tracking solution for Cluster Headache Sufferers
 
 If you, like me, suffer from CH then you'll know first hand how difficult it can be to give reliable information to doctors about our pain, how long attacks lasted, how effective treatments are and how long it takes to feel normal again after an attack. I found I was heavily under reporting when I started logging, and so I built this app to help logging easier when in the middle of an attack.<br /> 
