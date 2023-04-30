@@ -17,4 +17,4 @@ Do not expose this app to the public internet, if you want remote access to it u
 Rewriting the code from PHP into Python, pain logging is working now.<br />
 Medication Log (Oxygen, Taurine Drink, Sumatriptan, Magnesium etc.
 
-![image](https://user-images.githubusercontent.com/7745805/235329574-a5acbd94-c677-4c30-b438-82ca07604975.png)
+![image](https://user-images.githubusercontent.com/7745805/235332290-121de31a-e84c-4e8e-af40-768782348316.png)
