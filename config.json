@@ -1,13 +1,15 @@
 {
     "influxdb": {
-        "host": "0.0.0.0",
+        "host": "10.0.0.94",
         "port": 8086,
-        "username": "xx",
-        "password": "xx",
-        "database": "xx"
+        "username": "telegraf",
+        "password": "ptslondon",
+        "database": "telegraf"
     },
     "grafana": {
-        "api_key": "xxx",
-        "url": "http://0.0.0.0:3000"
+        "api_key": "eyJrIjoiSFpYcjl4VW52WnN1RTlSV1R6NnlxakxGVElFMHpaT08iLCJuIjoiY2x1c3Rlcl9oZWFkYWNoZXMiLCJpZCI6MX0=",
+        "url": "http://10.0.0.54:3000",
+        "dashboard_uid": "n_chIOy4k",
+        "panel_id": 2
     }
 }

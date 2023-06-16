@@ -15,7 +15,6 @@ index_html = '''
 <head>
     <meta charset="UTF-8">
     <title>Cluster Headache Tracker</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -47,23 +46,8 @@ index_html = '''
             <span>10</span>
         </div>
     </form>
-    <div class="nhs-pain-scale">
-        <h2>CH Pain Scale:</h2>
-        <p>0 - Pain free</p>
-        <p>1 - Very minor annoyance - first signs of an attack starting</p>
-        <p>2 - Minor annoyance - constant mild pain</p>
-        <p>3 - Major distraction - usual work / duties cease</p>
-        <p>4 - Throbbing pain</p>
-        <p>5 - Sharp pain or throbbing pain that causes serious discomfort</p>
-        <p>6 - Pain that takes your breath away, you find it hard to talk or communicate</p>
-        <p>7 - Pain that causes crying, tearing or holding your heading in search of relief</p>
-        <p>8 - Constant unbareable pain with brief moments of lesser pain</p>
-        <p>9 - Unable to speak, crying out or moaning uncontrollably - pain makes you pass out</p>
-        <p>10 - Unconscious</p>
-    </div>
-    <br><br>
-    
 
+    <br><br>
 
     <script>
         $(document).ready(function() {
