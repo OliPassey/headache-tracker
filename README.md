@@ -14,4 +14,4 @@ You will need to configure the InfluxDB Database, i use 'telegraf' as it already
 You must secure your influxdb server! Do not open it to the internet without understanding what you are doing!
 Do not expose this app to the public internet, if you want remote access to it use a VPN.
 
-![image](https://user-images.githubusercontent.com/7745805/235332290-121de31a-e84c-4e8e-af40-768782348316.png)
+![image](https://github.com/OliPassey/headache-tracker/assets/7745805/f48381f5-0e5f-4742-8e2a-77561b2082ea)
