@@ -3,11 +3,13 @@ from influxdb import InfluxDBClient
 import json
 import requests
 import time
-
+from flask import jsonify
 app = Flask(__name__)
 
 with open("config.json") as f:
     config = json.load(f)
+
+subject = config.get('subject', 'DefaultSubject')  # DefaultSubject will be used if 'subject' is not found in the config file
 
 index_html = '''
 <!DOCTYPE html>
@@ -17,6 +19,7 @@ index_html = '''
     <title>Cluster Headache Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="Refresh" content="60">
 </head>
 <body>
     <center>
@@ -25,7 +28,7 @@ index_html = '''
             <td>
                 <div id="pain_scale">
                     <h2>Current Pain Level</h2>
-                    <img src="https://grafana.passey.cloud/render/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=4&width=400&height=200&tz=Europe%2FLondon" id="pain_level" width="100%" height="200px">
+                    <iframe src="https://grafana.passey.cloud/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=4" width="450" height="200" frameborder="0"></iframe>
                 </div>
             </td>
             <td>
@@ -37,7 +40,7 @@ index_html = '''
             <td>
                 <div id="treatment_log_header">
                     <h2>Treatment Log</h2>
-                    <img src="https://grafana.passey.cloud/render/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=5&width=400&height=200&tz=Europe%2FLondon" id="treatment_log" width="100%" height="200px">
+                    <iframe src="https://grafana.passey.cloud/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=5" width="450" height="200" frameborder="0"></iframe>
                 </div>
             </td>
         </tr>
@@ -71,6 +74,9 @@ index_html = '''
     <br><br>
     <p id="current_status">{{ current_metric }}</p>
     <p id="last_annotation">{{ last_annotation }}</p>
+    <div class="authenticate">
+    <a id="grafana-auth-link" href="#">Authenticate with Grafana</a>
+    </div>
     <script>
         $(document).ready(function() {
             // Send pain metric to server when a button is clicked
@@ -97,6 +103,10 @@ index_html = '''
             setInterval(refreshGraph, 60000);
             setInterval(refreshTreatmentLog, 60000);
             setInterval(refreshPainLevel, 60000);
+
+            // Set the Grafana authentication link
+            $('#grafana-auth-link').attr('href', '{{ grafana_url }}');
+
         });
 
         function createAnnotation(annotation) {
@@ -161,7 +171,8 @@ last_annotation = ''
 
 @app.route("/")
 def index():
-    return render_template_string(index_html, current_metric=current_metric, last_annotation=last_annotation)
+    grafana_url = config.get('grafana', {}).get('pub_url', '#')
+    return render_template_string(index_html, current_metric=current_metric, last_annotation=last_annotation, grafana_url=grafana_url)
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -175,7 +186,7 @@ def submit():
         {
             "measurement": "cluster_headache",
             "tags": {
-                "subject": "Oli"
+                "subject": subject
             },
             "fields": {
                 "pain_value": pain_metric

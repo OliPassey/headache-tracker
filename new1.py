@@ -3,6 +3,7 @@ from influxdb import InfluxDBClient
 import json
 import requests
 import time
+import datetime 
 
 app = Flask(__name__)
 
@@ -92,6 +93,35 @@ def create_annotation():
     else:
         return f"Error creating annotation: {response.text}", 500
 
+@app.route("/log_headache_start", methods=["POST"])
+def log_headache_start():
+    start_time = request.form.get("start_time", type=int)  # Extract the start_time from the request
+
+    # Convert the timestamp from milliseconds (as JavaScript provides) to seconds (as Python uses)
+    start_time /= 1000
+
+    # Convert the timestamp to a datetime object
+    start_datetime = datetime.datetime.fromtimestamp(start_time)
+
+    json_body = [
+        {
+            "measurement": "cluster_headache",
+            "tags": {
+                "subject": subject
+            },
+            "time": start_datetime.strftime('%Y-%m-%dT%H:%M:%SZ'),  # Convert the datetime to a string in the format InfluxDB expects
+            "fields": {
+                "pain_value": 0  # Log a pain value of 0
+            }
+        }
+    ]
+
+    try:
+        client.write_points(json_body)
+        return jsonify({'success': True, 'message': 'Headache start logged successfully.'})
+
+    except Exception as e:
+        return f"Error logging headache start: {e}", 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
