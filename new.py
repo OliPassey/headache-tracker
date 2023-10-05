@@ -46,9 +46,7 @@ index_html = '''
         </tr>
     </table>
 
-    <div class="graphs">
-        <img src="https://grafana.passey.cloud/render/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=2&width=1000&height=400&tz=Europe%2FLondon" id="graph" width="80%" height="400px">
-    </div>
+    <iframe src="https://grafana.passey.cloud/d-solo/n_chIOy4k/cluster-headache?orgId=1&refresh=10s&panelId=2" width="80%" height="400" frameborder="0"></iframe>
 
     <div class="annotations">
         <button type="button" id="energy_drink">Energy Drink</button>
