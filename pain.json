@@ -1,0 +1,49 @@
+{
+    "scaleType": "custom",
+    "levels": [
+        {
+            "value": 0,
+            "description": "No pain"
+        },
+        {
+            "value": 1,
+            "description": "Loss of Focus / Muscle Twitching"
+        },
+        {
+            "value": 2,
+            "description": "Tension in head / Stiffness"
+        },
+        {
+            "value": 3,
+            "description": "Dull Pain in one area - Distracting"
+        },
+        {
+            "value": 4,
+            "description": "Dull Pain whole side of head - Severely Distracting"
+        },
+        {
+            "value": 5,
+            "description": "Throbbing Pain - Unable to work or function normally"
+        },
+        {
+            "value": 6,
+            "description": "Severe Throbbing Pain in one area"
+        },
+        {
+            "value": 7,
+            "description": "Severe Throbbing Pain whole side of head"
+        },
+        {
+            "value": 8,
+            "description": "Stabbing Pains"
+        },
+        {
+            "value": 9,
+            "description": "Crying out or Wriggling in Pain"
+        },
+        {
+            "value": 10,
+            "description": "Unconscious"
+        }
+    ]
+}

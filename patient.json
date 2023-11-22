@@ -1,0 +1,32 @@
+{
+    "fName": "Oliver",
+    "lName": "Passey",
+    "prefName": "Oli",
+    "dob": "1985-03-22",
+    "gender": "Male",
+    "smoker": "yes",
+    "1stHeadache": "2010",
+    "headacheType": "Episodic",
+    "presMedications": [
+        "Sumatriptan",
+        "Mushrooms",
+        "Sex",
+        "Magnesium",
+        "Taurine"
+    ],
+    "abortives": [
+        "Oxygen",
+        "Taurine",
+        "Head"
+    ],
+    "symptoms": [
+        "Loss of focus",
+        "Pain",
+        "Eye Tearing",
+        "Photosensitivity",
+        "Overheating",
+        "Blocked Nose",
+        "Running Nose",
+        "Nausea"
+    ]
+}

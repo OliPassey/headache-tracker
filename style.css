@@ -1,0 +1,11 @@
+/* style.css */
+.pain-level-button {
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid grey;
+    cursor: pointer;
+}
+.pain-level-button.active {
+    border-color: green;
+    box-shadow: 0 0 15px green;
+}

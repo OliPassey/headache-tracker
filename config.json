@@ -1,15 +1,25 @@
 {
-    "influxdb": {
-        "host": "10.0.0.94",
-        "port": 8086,
-        "username": "telegraf",
-        "password": "xxx",
-        "database": "telegraf"
+    "MongoDB": {
+        "IP": "10.0.3.12",
+        "Port": "27017",
+        "Database": "clusters",
+        "Collection": "headaches"
     },
-    "grafana": {
-        "api_key": "xxx=",
-        "url": "http://10.0.0.x:3000",
-        "dashboard_uid": "xxx",
-        "panel_id": 2
+    "SMTP": {
+        "Host": "host",
+        "Port": "465",
+        "User": "root",
+        "Pass": "ohbaby"
+    },
+    "Grafana": {
+        "URL": "https://grafana.passey.cloud/",
+        "APIToken": "eyJrIjoiM0VjRUc3MzZwRWlIb2pmSkowN003TlhaZnI0NFU4Q04iLCJuIjoiY2x1c3RlcnMiLCJpZCI6MX0="
+    },
+    "InfluxDB": {
+        "Host": "10.0.3.7",
+        "Port": "8086",
+        "User": "telegraf",
+        "Pass": "ptslondon",
+        "Database": "telegraf"
     }
 }
