@@ -1,0 +1,49 @@
+{
+    "scaleType": "NHS",
+    "levels": [
+        {
+            "value": 0,
+            "description": "No pain"
+        },
+        {
+            "value": 1,
+            "description": "Mild pain - noticeable but not interfering with daily activities"
+        },
+        {
+            "value": 2,
+            "description": "Minor pain - noticeable and slightly interfering with daily activities"
+        },
+        {
+            "value": 3,
+            "description": "Uncomfortable pain - distracting and more difficult to ignore"
+        },
+        {
+            "value": 4,
+            "description": "Moderate pain - significantly distracting and limits daily activities"
+        },
+        {
+            "value": 5,
+            "description": "Moderately strong pain - very distracting, significantly limits daily activities"
+        },
+        {
+            "value": 6,
+            "description": "Strong pain - intensely distracting, activities greatly limited"
+        },
+        {
+            "value": 7,
+            "description": "Very strong pain - dominates senses, significantly impairs activities"
+        },
+        {
+            "value": 8,
+            "description": "Intense pain - physical activity severely limited, hard to concentrate"
+        },
+        {
+            "value": 9,
+            "description": "Excruciating pain - unable to engage in normal activities, requires urgent attention"
+        },
+        {
+            "value": 10,
+            "description": "Unimaginable pain - unbearable, unable to function, requires emergency attention"
+        }
+    ]
+}

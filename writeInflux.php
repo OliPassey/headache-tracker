@@ -5,7 +5,7 @@ use InfluxDB2\Client;
 use InfluxDB2\Point;
 use InfluxDB2\Model\WritePrecision;
 
-function writeToInfluxDB($level, $startTime = null) {
+function writeToInfluxDB($level) {
     // Read InfluxDB configuration from config.json
     $config = json_decode(file_get_contents('config.json'), true);
     $influxDBConfig = $config['InfluxDB'];
@@ -27,17 +27,12 @@ function writeToInfluxDB($level, $startTime = null) {
         "org" => "-",
         "precision" => WritePrecision::S
     ]);
-
-    // If startTime is not provided, use current time
-    if ($startTime === null) {
-        $startTime = microtime(true);
-    }
+    $startTime = (microtime(true));
 
     // Prepare data point
     $point = Point::measurement('pain_log')
         ->addTag('user', $preferredName)
-        ->addField('level', $level)
-        ->time($startTime);
+        ->addField('level', $level);
 
     // Write the point to the database
     try {
@@ -50,15 +45,16 @@ function writeToInfluxDB($level, $startTime = null) {
         $result = false;
     }
 
+
     return $result; // Returns true on success, false on failure
 }
 
 // Example usage
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    error_log("POST Data: " . print_r($_POST, true)); // Debugging line
     $level = $_POST['painLevel'] ?? null;
-    $startTime = $_POST['startTime'] ?? null;
     if ($level !== null) {
-        $result = writeToInfluxDB($level, $startTime);
+        $result = writeToInfluxDB($level);
     // Handle $result to see if it was successful or not
     echo $result ? 'Success' : 'Failure';
 }

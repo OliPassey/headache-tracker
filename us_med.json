@@ -1,0 +1,49 @@
+{
+    "scaleType": "US Standard",
+    "levels": [
+        {
+            "value": 0,
+            "description": "No pain at all"
+        },
+        {
+            "value": 1,
+            "description": "Very minor annoyance - hardly noticeable"
+        },
+        {
+            "value": 2,
+            "description": "Minor annoyance - occasional"
+        },
+        {
+            "value": 3,
+            "description": "Noticeable but tolerable pain"
+        },
+        {
+            "value": 4,
+            "description": "Moderate pain, distracting"
+        },
+        {
+            "value": 5,
+            "description": "Distracting, can't be ignored for more than a few minutes"
+        },
+        {
+            "value": 6,
+            "description": "Pain that interferes with normal daily activities, can't be ignored"
+        },
+        {
+            "value": 7,
+            "description": "Intense pain, limits daily activity, cannot be ignored for any length of time"
+        },
+        {
+            "value": 8,
+            "description": "Physical activity severely limited, pain dominates senses"
+        },
+        {
+            "value": 9,
+            "description": "Excruciating pain, unable to converse, crying out or moaning"
+        },
+        {
+            "value": 10,
+            "description": "Unbearable pain, bedridden, possibly delirious, immobile"
+        }
+    ]
+}

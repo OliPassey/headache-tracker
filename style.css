@@ -1,11 +1,67 @@
-/* style.css */
-.pain-level-button {
-    padding: 10px;
-    margin: 5px;
-    border: 2px solid grey;
-    cursor: pointer;
+/* Global Styles for Dark Mode */
+body {
+    background-color: #121212; /* Dark background */
+    color: #E0E0E0; /* Light text */
+    font-family: Arial, sans-serif; /* Readable font */
 }
+
+/* Button Styling */
+button {
+    padding: 20px;
+    height: 90px;
+    margin: 5px;
+    border: 1px solid #333333;
+    background-color: #1e1e1e;
+    color: #E0E0E0;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    font-size: 24px;
+}
+
+button:hover {
+    background-color: #333333;
+}
+
 .pain-level-button.active {
-    border-color: green;
-    box-shadow: 0 0 15px green;
+    border-color: #005f73; /* Avoiding overly bright colors */
+    box-shadow: 0 0 10px #005f73; /* Subtle shadow */
+}
+
+/* Responsiveness: Adjustments for smaller screens */
+@media (max-width: 600px) {
+    button {
+        width: 100%; /* Full width for smaller screens */
+        margin: 5px 0; /* Adjust margin for stacked layout */
+    }
+}
+
+/* Inline styles for specific layout adjustments */
+.grid-container {
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.pain-level-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for number pad layout */
+}
+
+.item-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for medications and symptoms */
+}
+
+@media (max-width: 1000px) {
+    h2 {
+        font-size: 72px;
+    }
+    .start-headache-btn {
+        width: 100%; /* Full width for Start New Headache button */
+        height: 200px;
+        padding: 0;
+    }
+
+    button {
+        height: 200px;
+        font-size: 55px;
+    }
 }

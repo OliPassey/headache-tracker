@@ -1,6 +1,5 @@
 <?php
 
-
 // Check if configuration files exist
 $configFiles = ['config.json', 'patient.json', 'pain.json'];
 foreach ($configFiles as $file) {
@@ -12,13 +11,15 @@ foreach ($configFiles as $file) {
 }
 
 // Assuming the files exist, you can read them here
-// $config = json_decode(file_get_contents('config.json'), true);
-// $patient = json_decode(file_get_contents('patient.json'), true);
-// $painScale = json_decode(file_get_contents('pain.json'), true);
+$config = json_decode(file_get_contents('config.json'), true);
+$patient = json_decode(file_get_contents('patient.json'), true);
+$painScale = json_decode(file_get_contents('pain.json'), true);
 
-// Rest of your PHP code
+// Read medications, abortive methods, and symptoms from patient.json or another appropriate file
+$medications = $patient['presMedications'] ?? [];
+$abortiveMethods = $patient['abortives'] ?? [];
+$symptoms = $patient['symptoms'] ?? [];
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,21 +27,42 @@ foreach ($configFiles as $file) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Log Headache Start</h2>
-    <div>
-        <button type="button" class="start-time-button" onclick="logHeadacheStart(5)">Started 5 mins ago</button>
-        <button type="button" class="start-time-button" onclick="logHeadacheStart(10)">Started 10 mins ago</button>
-        <button type="button" class="start-time-button" onclick="logHeadacheStart(15)">Started 15 mins ago</button>
-    </div><br><br>
-    <h1>Patient Pain Log</h1>
-    <div id="painLevelButtons">
+    <center>
+    <button type="button" class="start-headache-btn" onclick="startNewHeadache()">Start New Headache</button>
+
+    <h2>Current Pain</h2>
+    <div class="grid-container pain-level-grid">
         <?php for ($i = 0; $i <= 10; $i++): ?>
             <button type="button" class="pain-level-button" onclick="logPainLevel(<?php echo $i; ?>)"><?php echo $i; ?></button>
         <?php endfor; ?>
     </div>
 
-    <!-- Additional form elements and JavaScript will go here -->
-    
+    <!-- Medications -->
+    <h2>Medication</h2>
+    <div class="grid-container item-grid">
+        <?php foreach ($medications as $medication): ?>
+            <button type="button" onclick="logMedication('<?php echo $medication; ?>')"><?php echo $medication; ?></button>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Abortive Methods -->
+    <h2>Abortives</h2>
+    <div class="grid-container item-grid">
+        <?php foreach ($abortiveMethods as $method): ?>
+            <button type="button" onclick="logMethod('<?php echo $method; ?>')"><?php echo $method; ?></button>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Symptoms -->
+    <h2>Symptoms</h2>
+    <div class="grid-container item-grid">
+        <?php foreach ($symptoms as $symptom): ?>
+            <button type="button" onclick="logSymptom('<?php echo $symptom; ?>')"><?php echo $symptom; ?></button>
+        <?php endforeach; ?>
+    </div>
+
+    </center>
+
     <script>
         function logPainLevel(level) {
             // Remove 'active' class from all buttons
@@ -65,20 +87,32 @@ foreach ($configFiles as $file) {
             xhr.send("painLevel=" + level);
         }
         
-        function logHeadacheStart(minutesAgo) {
-            // Calculate the timestamp for when the headache started
-            var startTime = new Date(new Date().getTime() - minutesAgo * 60000).getTime();
+        function startNewHeadache() {
+            logPainLevel(0); // Logs a pain level of 0 at the current time
+        }
 
-            // Send the start time and level 0 to writeInflux.php
+        function logData(dataType, dataValue) {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "writeInflux.php", true);
+            xhr.open("POST", "writeMongo.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                    // Handle response here. For example, show a message to the user.
+                    console.log(dataType + ' logged: ' + dataValue);
                 }
             }
-            xhr.send("painLevel=0&startTime=" + startTime);
+            xhr.send("data=" + encodeURIComponent(JSON.stringify({type: dataType, value: dataValue})));
+        }
+
+        function logMedication(medication) {
+            logData('medication', medication);
+        }
+
+        function logMethod(method) {
+            logData('abortiveMethod', method);
+        }
+
+        function logSymptom(symptom) {
+            logData('symptom', symptom);
         }
 
     </script>
