@@ -8,25 +8,27 @@
     "1stHeadache": "2010",
     "headacheType": "Episodic",
     "presMedications": [
-        "Sumatriptan",
+        "Sumatriptan Nasal",
+        "Sumatriptan Inject",
         "Mushrooms",
-        "Sex",
         "Magnesium",
-        "Taurine"
+        "Taurine",
+        "Sex"
     ],
     "abortives": [
-        "Oxygen",
+        "Oxygen On",
+        "Oxygen Off",
         "Taurine",
         "Head"
     ],
     "symptoms": [
         "Loss of focus",
-        "Pain",
         "Eye Tearing",
         "Photosensitivity",
         "Overheating",
         "Blocked Nose",
         "Running Nose",
-        "Nausea"
+        "Nausea",
+        "Pain"
     ]
 }

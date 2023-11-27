@@ -1,3 +1,32 @@
+/* Initial style for the fade-in effect */
+.headache-id {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Class to trigger the fade-in effect */
+.fade-in {
+    animation: fadeIn 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        display: block;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Style for the dark color after fading in */
+#headache-id.dark {
+    background-color: #333; /* Change to your desired dark background color */
+    color: #fff; /* Change to your desired text color */
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
 /* Global Styles for Dark Mode */
 body {
     background-color: #121212; /* Dark background */
@@ -11,15 +40,15 @@ button {
     height: 90px;
     margin: 5px;
     border: 1px solid #333333;
-    background-color: #1e1e1e;
-    color: #E0E0E0;
+    background-color: #2b0404; /* Dark button background color */
+    color: #E0E0E0; /* Light text color */
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     font-size: 24px;
 }
 
 button:hover {
-    background-color: #333333;
+    background-color: #333333; /* Darker background color on hover */
 }
 
 .pain-level-button.active {
@@ -64,4 +93,64 @@ button:hover {
         height: 200px;
         font-size: 55px;
     }
+}
+/* Report Section Styling */
+.report-section {
+    margin: 20px;
+    padding: 15px;
+    background-color: #1a1a1a; /* Slightly lighter than body background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.report-header {
+    font-size: 28px;
+    color: #4caf50; /* A greenish hue for headers */
+    margin-bottom: 15px;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Chart Container */
+.chart-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+@media screen and (max-width: 600px) {
+    .report-table th, .report-table td {
+        display: block;
+        text-align: right;
+    }
+
+    .report-table th::before, .report-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+.report-link, .report-button {
+    background-color: #005f73; /* Consistent with active button color */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.report-link:hover, .report-button:hover {
+    background-color: #007bff; /* Slightly brighter on hover */
 }
