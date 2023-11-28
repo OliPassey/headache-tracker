@@ -119,7 +119,7 @@ echo "var painLevelData = " . json_encode($painLevelsData) . ";";
 echo "</script>";
 ?>
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/chartjs/chart.umd.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -129,39 +129,56 @@ document.addEventListener('DOMContentLoaded', function() {
         data: {
             datasets: [{
                 label: 'Pain Level',
-                backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                borderColor: 'rgba(0, 123, 255, 1)',
-                data: painLevelData
+                backgroundColor: 'red',
+                borderColor: 'red',
+                data: painLevelData,
+                tension: 0.6
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Pain Levels Over Time'
+                },
+            },
+            interaction: {
+                intersect: false,
+            },
             scales: {
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'minute'
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Time'
                     }
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Pain Level'
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 10 // Assuming pain level ranges from 0 to 10
+                }
             }
         }
     });
 });
+
 </script>
 </div>
 <?php
-// Calculate the average pain level and round to one decimal place
-$averagePainLevel = round(array_sum($painLevels) / count($painLevels), 1);
-// Check if there are pain level records
+// Calculate the average pain level
 if (count($painLevels) > 0) {
-    $averagePainLevel = round(array_sum($painLevels) / count($painLevels), 1);
+    $averagePainLevel = array_sum($painLevels) / count($painLevels);
+    $averagePainLevel = round($averagePainLevel, 1); // Round to one decimal place
 } else {
     $averagePainLevel = 0; // Or any default value you prefer
 }
+
 
 
 // Summarize the information
@@ -197,3 +214,11 @@ echo "</div>"; // Closing report-section div
     exit; // Stop further execution if headacheId is not provided
 }
 ?>
+
+<div>
+    <form action='deleteHeadache.php' method='post'>
+        <input type='hidden' name='headacheId' value='<?php echo $headacheId; ?>'>
+        <input type='submit' class='delete-headache-btn' value='Delete Report'>
+    </form>
+</div>
+

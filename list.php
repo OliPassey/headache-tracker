@@ -23,19 +23,53 @@ $collection = $client->selectCollection($mongoDatabase, $mongoCollection);
 // Fetch distinct headache IDs
 $headacheIds = $collection->distinct('headacheId');
 
+// Function to get max pain level for a headache
+function getMaxPainLevel($collection, $headacheId) {
+    $filter = ['headacheId' => $headacheId, 'type' => 'painLevel'];
+    $options = [
+        'sort' => ['value' => -1], // Sort in descending order by pain level
+        'limit' => 1 // Limit to 1 document
+    ];
+
+    $result = $collection->findOne($filter, $options);
+    return $result ? $result['value'] : 'N/A';
+}
+
+// Function to get start time for a headache
+function getStartTime($collection, $headacheId) {
+    $filter = ['headacheId' => $headacheId, 'type' => 'headacheStart'];
+    $result = $collection->findOne($filter);
+
+    return $result ? $result['timestamp']->toDateTime()->format('d-m-Y') : 'N/A';
+}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Headache ID List</title>
-    <link rel="stylesheet" href="style.css"> <!-- Include your stylesheet if needed -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
 </head>
 <body>
     <h1>Headache Reports</h1>
-    <ul>
+    <table>
+        <tr>
+            <th>Headache ID</th>
+            <th>Start Time</th>
+            <th>Max Pain Level</th>
+            <th>Report</th>
+        </tr>
         <?php foreach ($headacheIds as $id): ?>
-            <li><a href="report.php?headacheId=<?php echo urlencode($id); ?>">Report for <?php echo htmlspecialchars($id); ?></a></li>
+        <tr>
+            <td><?php echo htmlspecialchars(substr($id, 0, 5)); ?></td>
+            <td><?php echo getStartTime($collection, $id); ?></td>
+            <td class="center-text"><?php echo getMaxPainLevel($collection, $id); ?></td>
+            <td><a href="report.php?headacheId=<?php echo urlencode($id); ?>" class="report-button">View Report</a></td>
+        </tr>
         <?php endforeach; ?>
-    </ul>
+    </table>
 </body>
 </html>
