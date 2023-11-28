@@ -54,6 +54,10 @@ function getStartTime($collection, $headacheId) {
     </style>
 </head>
 <body>
+    <!-- Home Button -->
+    <a href='index.php' class='home-button'>Home</a>
+    <br><br>
+    
     <h1>Headache Reports</h1>
     <table>
         <tr>

@@ -28,6 +28,10 @@ $symptoms = $patient['symptoms'] ?? [];
 </head>
 <body>
     <center>
+    <!-- List Button -->
+    <a href='list.php' class='list-button'>View All Headaches</a>
+    <br><br>
+
     <button type="button" class="start-headache-btn" onclick="startNewHeadache()">Start New Headache</button>
     <div id="start-headache-id" class="fade-in">Headache ID: <span id="generated-headache-id"></span></div>
 
@@ -65,9 +69,6 @@ $symptoms = $patient['symptoms'] ?? [];
     <h2>Recovery</h2>
     <button type="button" class="end-headache-btn" onclick="endHeadache()">End Headache</button>
     <div id="end-headache-id"></div> <!-- Use a unique id for the End Headache section -->
-
-    <h3>Admin</h3>
-    <a href="list.php">All Reports</a>
     </center>
 
     <script>

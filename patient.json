@@ -12,14 +12,12 @@
         "Sumatriptan Inject",
         "Mushrooms",
         "Magnesium",
-        "Taurine",
-        "Sex"
+        "Taurine"
     ],
     "abortives": [
         "Oxygen On",
         "Oxygen Off",
-        "Taurine",
-        "Head"
+        "Taurine"
     ],
     "symptoms": [
         "Loss of focus",

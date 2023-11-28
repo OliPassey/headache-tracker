@@ -44,6 +44,13 @@ $painLevelsData = [];
 $oxygenOnTime = null;
 $oxygenOffTime = null;
 
+$isAjaxRequest = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+
+if (!$isAjaxRequest) {
+    // Output the HTML header, styles, etc.
+}
+
+
 // Process the data
 foreach ($cursor as $document) {
     // Check if the document matches the specified headacheId
@@ -178,11 +185,15 @@ if (count($painLevels) > 0) {
 } else {
     $averagePainLevel = 0; // Or any default value you prefer
 }
+?>
 
+<!-- Home Button -->
+<a href='index.php' class='home-button'>Home</a>
+<!-- List Button -->
+<a href='list.php' class='list-button'>List</a>
 
-
+<?php
 // Summarize the information
-
 echo "<div class='report-section'>";
 echo "<h2 class='report-header'>Headache Summary for ID: $headacheId</h2>";
 echo "<p>Start Time: $startTimeFormatted</p>";
@@ -213,12 +224,16 @@ echo "</div>"; // Closing report-section div
     echo "No headacheId provided.";
     exit; // Stop further execution if headacheId is not provided
 }
+
+
+if (!$isAjaxRequest) {
+ 
+}
 ?>
 
 <div>
     <form action='deleteHeadache.php' method='post'>
-        <input type='hidden' name='headacheId' value='<?php echo $headacheId; ?>'>
+        <input type='hidden' name='headacheId' value='<?php echo htmlspecialchars($headacheId); ?>'>
         <input type='submit' class='delete-headache-btn' value='Delete Report'>
     </form>
-</div>
-
+</div

@@ -2,12 +2,14 @@
 .headache-id {
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    
 }
 
 /* Class to trigger the fade-in effect */
 .fade-in {
     animation: fadeIn 2s;
     animation-fill-mode: forwards;
+    font-size: 24px;
 }
 
 @keyframes fadeIn {
@@ -20,11 +22,8 @@
     }
 }
 
-/* Style for the dark color after fading in */
-#headache-id.dark {
-    background-color: #333; /* Change to your desired dark background color */
-    color: #fff; /* Change to your desired text color */
-    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+.start-headache-id {
+    font-size: 24px;
 }
 
 /* Global Styles for Dark Mode */
@@ -155,7 +154,7 @@ button:hover {
     background-color: #007bff; /* Slightly brighter on hover */
 }
 
-.delete-headache-btn {
+.delete-headache-btn, .home-button, .list-button  {
     background-color: #005f73; /* Consistent with active button color */
     color: white;
     padding: 10px 20px;
