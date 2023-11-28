@@ -1,4 +1,15 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Include the MongoDB PHP driver
+require 'vendor/autoload.php';
+
+// Initialize variables
+$showPatientForm = false;
+$patientConfigCreated = false;
+$painConfigCreated = false;
 
 // Recieve step 1 config relating to infrastrucutre, write to config.json
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['createConfig'])) {
@@ -9,16 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['createConfig'])) {
             "Port" => $_POST['mongodb_port'],
             "Database" => $_POST['mongodb_database'],
             "Collection" => $_POST['mongodb_collection']
-        ],
-        "SMTP" => [
-            "Host" => $_POST['smtp_host'],
-            "Port" => $_POST['smtp_port'],
-            "User" => $_POST['smtp_user'],
-            "Pass" => $_POST['smtp_pass']
-        ],
-        "Grafana" => [
-            "URL" => $_POST['grafana_url'],
-            "APIToken" => $_POST['grafana_api_token']
         ],
         "InfluxDB" => [
             "Host" => $_POST['influxdb_host'],
@@ -86,12 +87,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $painConfigCreated = true;
     }
 }
+
+// Redirect if necessary
+if (isset($painConfigCreated) && $painConfigCreated) {
+    header('Location: index.php');
+    exit; // Make sure to exit after sending a header redirect
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Setup Configuration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h2>Infrastructure Configuration</h2>
@@ -101,16 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Port: <input type="number" name="mongodb_port" required><br>
         Database: <input type="text" name="mongodb_database" required><br>
         Collection: <input type="text" name="mongodb_collection" required><br>
-
-        <h3>SMTP Configuration</h3>
-        Host: <input type="text" name="smtp_host" required><br>
-        Port: <input type="number" name="smtp_port" required><br>
-        User: <input type="text" name="smtp_user" required><br>
-        Pass: <input type="password" name="smtp_pass" required><br>
-
-        <h3>Grafana Configuration</h3>
-        URL: <input type="text" name="grafana_url" required><br>
-        API Token: <input type="text" name="grafana_api_token" required><br>
 
         <h3>InfluxDB Configuration</h3>
         Host: <input type="text" name="influxdb_host" required><br>

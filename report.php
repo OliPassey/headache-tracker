@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         data: {
             datasets: [{
                 label: 'Pain Level',
-                backgroundColor: 'red',
-                borderColor: 'red',
+                backgroundColor: 'purple',
+                borderColor: 'purple',
                 data: painLevelData,
                 tension: 0.6
             }]
@@ -147,8 +147,18 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Pain Levels Over Time'
+                    text: 'Pain Levels Over Time',
+                    font: {
+                        size: 26 // Set title font size
+                    }
                 },
+                legend: {
+                    labels: {
+                        font: {
+                            size: 20 // Set legend labels font size
+                        }
+                    }
+                }
             },
             interaction: {
                 intersect: false,
@@ -157,23 +167,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 x: {
                     display: true,
                     title: {
-                        display: true,
-                        text: 'Time'
+                        display: false,
+                        text: 'Time',
+                        font: {
+                            size: 24 // Set x-axis title font size
+                        }
+                    },
+                    ticks: {
+                        callback: function(val, index) {
+                            // Hide every 2nd tick label
+                            return index % 2 === 0 ? this.getLabelForValue(val) : '';
+                        },
+                        font: {
+                            size: 18 // Set x-axis ticks font size
+                        }
                     }
                 },
                 y: {
                     display: true,
                     title: {
-                        display: true,
-                        text: 'Pain Level'
+                        display: false,
+                        text: 'Pain Level',
+                        font: {
+                            size: 32 // Set y-axis title font size
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 24 // Set y-axis ticks font size
+                        }
                     },
                     suggestedMin: 0,
-                    suggestedMax: 10 // Assuming pain level ranges from 0 to 10
+                    suggestedMax: 10
                 }
             }
         }
     });
 });
+
 
 </script>
 </div>

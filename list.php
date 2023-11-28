@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Include the MongoDB PHP driver
 require 'vendor/autoload.php';
@@ -20,8 +17,19 @@ $mongoConnectionString = "mongodb://$mongoIP:$mongoPort";
 $client = new MongoDB\Client($mongoConnectionString);
 $collection = $client->selectCollection($mongoDatabase, $mongoCollection);
 
-// Fetch distinct headache IDs
-$headacheIds = $collection->distinct('headacheId');
+// Fetch all headache start documents and sort them by timestamp
+$filter = ['type' => 'headacheStart'];
+$options = ['sort' => ['timestamp' => -1]]; // Sort in descending order
+
+$cursor = $collection->find($filter, $options);
+
+// Extract distinct headacheIds from the sorted documents
+$headacheIds = [];
+foreach ($cursor as $doc) {
+    if (!in_array($doc['headacheId'], $headacheIds)) {
+        $headacheIds[] = $doc['headacheId'];
+    }
+}
 
 // Function to get max pain level for a headache
 function getMaxPainLevel($collection, $headacheId) {
@@ -49,15 +57,12 @@ function getStartTime($collection, $headacheId) {
 <head>
     <title>Headache ID List</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-
-    </style>
 </head>
 <body>
     <!-- Home Button -->
     <a href='index.php' class='home-button'>Home</a>
     <br><br>
-    
+
     <h1>Headache Reports</h1>
     <table>
         <tr>

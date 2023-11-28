@@ -39,7 +39,7 @@ button {
     height: 90px;
     margin: 5px;
     border: 1px solid #333333;
-    background-color: #2b0404; /* Dark button background color */
+    background-color: #210a3b; /* Dark button background color */
     color: #E0E0E0; /* Light text color */
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
@@ -77,13 +77,16 @@ button:hover {
 .item-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 columns for medications and symptoms */
 }
-
-@media (max-width: 1000px) {
+p {
+    font-size: 32px;
+    color: #c5c5c5;
+}
+@media (max-width: 1080px) {
     h2 {
         font-size: 72px;
     }
     .start-headache-btn {
-        width: 100%; /* Full width for Start New Headache button */
+        width: 90%; /* Full width for Start New Headache button */
         height: 200px;
         padding: 0;
     }
@@ -92,6 +95,8 @@ button:hover {
         height: 200px;
         font-size: 55px;
     }
+
+
 }
 /* Report Section Styling */
 .report-section {
@@ -103,8 +108,8 @@ button:hover {
 }
 
 .report-header {
-    font-size: 28px;
-    color: #4caf50; /* A greenish hue for headers */
+    font-size: 50px;
+    color: #1873af; /* A greenish hue for headers */
     margin-bottom: 15px;
 }
 
@@ -121,9 +126,10 @@ button:hover {
 
 /* Chart Container */
 .chart-container {
-    max-width: 600px;
+    max-width: 95%;
     margin: 20px auto;
-}
+    }
+
 @media screen and (max-width: 600px) {
     .report-table th, .report-table td {
         display: block;
@@ -153,8 +159,7 @@ button:hover {
 .report-link:hover, .report-button:hover {
     background-color: #007bff; /* Slightly brighter on hover */
 }
-
-.delete-headache-btn, .home-button, .list-button  {
+.home-button, .list-button {
     background-color: #005f73; /* Consistent with active button color */
     color: white;
     padding: 10px 20px;
@@ -165,13 +170,28 @@ button:hover {
     margin: 10px;
     border: none;
     border-radius: 4px;
+    width: 43%;
+    height: 48px;
+    font-size: 40px;
+}
+.delete-headache-btn  {
+    background-color: #005f73; /* Consistent with active button color */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    border: none;
+    border-radius: 4px;
+    height: 80px;
 }
 
 .center-text {
     text-align: center;
 }
 .report-button {
-    background-color: #4CAF50; /* Green */
+    background-color: #1c411c; /* Green */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -182,4 +202,87 @@ button:hover {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
+}
+
+table {
+    width: 75%;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 24px;
+    color: #cecece;
+}
+
+th, td {
+    border: 1px solid #3a3a3a;
+    padding: 8px;
+}
+
+th {
+    background-color: #32355c;
+    text-align: left;
+    color: #afafaf;
+}
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #242424;
+    color: #ffffff;
+}
+
+h2, h3 {
+    color: #ffffff;
+}
+
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #202020;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="submit"] {
+        width: calc(100% - 20px);
+    }
 }
