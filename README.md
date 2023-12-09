@@ -3,7 +3,7 @@ A tracking solution for Cluster Headache Sufferers
 I often under report my headaches due to the nature of the condition, this app aims to increase accuracy and server as a companion app for patients and carers alike. I aim to add export features so data can easily be taken to medical appointments.
 
 ## Install  
-Pull this docker container "olipassey/headache-tracker"  
+Pull this docker container "olipassey/cluster-tracker"  
 
 ## Current Requirements
 Web Server with PHP 8.1  
