@@ -2,7 +2,7 @@
 require_once 'vendor/autoload.php';
 
 function getMongoDBConfig() {
-    $config = json_decode(file_get_contents('config.json'), true);
+    $config = json_decode(file_get_contents('conf/config.json'), true);
     return $config['MongoDB'] ?? null;
 }
 

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 // MongoDB connection setup (similar to report.php)
-$configJson = file_get_contents('config.json');
+$configJson = file_get_contents('conf/config.json');
 $config = json_decode($configJson, true);
 $mongoDBConfig = $config['MongoDB'];
 $mongoIP = $mongoDBConfig['IP'];

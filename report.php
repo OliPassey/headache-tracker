@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 // Read the MongoDB configuration from config.json
-$configJson = file_get_contents('config.json');
+$configJson = file_get_contents('conf/config.json');
 $config = json_decode($configJson, true);
 
 // Extract MongoDB connection details

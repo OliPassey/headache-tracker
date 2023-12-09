@@ -20,13 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['createConfig'])) {
             "Port" => $_POST['mongodb_port'],
             "Database" => $_POST['mongodb_database'],
             "Collection" => $_POST['mongodb_collection']
-        ],
-        "InfluxDB" => [
-            "Host" => $_POST['influxdb_host'],
-            "Port" => $_POST['influxdb_port'],
-            "User" => $_POST['influxdb_user'],
-            "Pass" => $_POST['influxdb_pass'],
-            "Database" => $_POST['influxdb_database']
         ]
     ];
 
@@ -34,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['createConfig'])) {
     $json_data = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
     // Save JSON data to a file
-    file_put_contents('config.json', $json_data);
+    file_put_contents('conf/config.json', $json_data);
 
     // Show the second part of the form
     $showPatientForm = true;
@@ -66,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $json_patient_data = json_encode($patientData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         // Save JSON data to a file
-        file_put_contents('patient.json', $json_patient_data);
+        file_put_contents('conf/patient.json', $json_patient_data);
 
         // Optionally, set a flag or message indicating success
         $patientConfigCreated = true;
@@ -79,10 +72,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST['painScale'] === 'custom') {
             // Handle custom pain scale creation
             $painData = json_decode($_POST['customPainData'], true);
-            file_put_contents('pain.json', json_encode($painData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            file_put_contents('conf/pain.json', json_encode($painData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         } else {
             // Copy content from selected predefined file
-            copy($_POST['painScale'] . '.json', 'pain.json');
+            copy($_POST['painScale'] . '.json', 'conf/pain.json');
         }
         $painConfigCreated = true;
     }
@@ -105,10 +98,10 @@ if (isset($painConfigCreated) && $painConfigCreated) {
     <h2>Infrastructure Configuration</h2>
     <form method="post">
         <h3>MongoDB Configuration</h3>
-        IP: <input type="text" name="mongodb_ip" required><br>
-        Port: <input type="number" name="mongodb_port" required><br>
-        Database: <input type="text" name="mongodb_database" required><br>
-        Collection: <input type="text" name="mongodb_collection" required><br>
+        IP: <input type="text" name="mongodb_ip" value="mongodb" required><br>
+        Port: <input type="number" name="mongodb_port" value="27017" required><br>
+        Database: <input type="text" name="mongodb_database" value="clusters" required><br>
+        Collection: <input type="text" name="mongodb_collection" value="headaches" required><br>
         <input type="submit" name="createConfig" value="Create Config">
     </form>
 </body>

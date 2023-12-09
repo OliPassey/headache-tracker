@@ -1,5 +1,5 @@
 # Use an official PHP runtime as a parent image
-FROM php:8.1-apache
+FROM php:7.4.33-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \

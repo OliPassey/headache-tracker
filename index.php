@@ -1,7 +1,7 @@
 <?php
 
 // Check if configuration files exist
-$configFiles = ['config.json', 'patient.json', 'pain.json'];
+$configFiles = ['conf/config.json', 'conf/patient.json', 'conf/pain.json'];
 foreach ($configFiles as $file) {
     if (!file_exists($file)) {
         // Redirect to setup.php if a configuration file is missing
@@ -11,9 +11,9 @@ foreach ($configFiles as $file) {
 }
 
 // Assuming the files exist, you can read them here
-$config = json_decode(file_get_contents('config.json'), true);
-$patient = json_decode(file_get_contents('patient.json'), true);
-$painScale = json_decode(file_get_contents('pain.json'), true);
+$config = json_decode(file_get_contents('conf/config.json'), true);
+$patient = json_decode(file_get_contents('conf/patient.json'), true);
+$painScale = json_decode(file_get_contents('conf/pain.json'), true);
 
 // Read medications, abortive methods, and symptoms from patient.json or another appropriate file
 $medications = $patient['presMedications'] ?? [];
@@ -36,6 +36,8 @@ $symptoms = $patient['symptoms'] ?? [];
     <div id="start-headache-id" class="fade-in">Headache ID: <span id="generated-headache-id"></span></div>
 
     <h2>Current Pain</h2>
+    <!-- Pain Level Description Display -->
+    <div id="pain-level-description"></div>
     <div class="grid-container pain-level-grid">
         <?php for ($i = 0; $i <= 10; $i++): ?>
             <button type="button" class="pain-level-button" onclick="logPainLevel(<?php echo $i; ?>)"><?php echo $i; ?></button>
@@ -48,6 +50,7 @@ $symptoms = $patient['symptoms'] ?? [];
         <?php foreach ($medications as $medication): ?>
             <button type="button" onclick="logMedication('<?php echo $medication; ?>')"><?php echo $medication; ?></button>
         <?php endforeach; ?>
+
     </div>
 
     <!-- Abortive Methods -->
@@ -74,6 +77,9 @@ $symptoms = $patient['symptoms'] ?? [];
     <script>
         function logPainLevel(level) {
             var headacheId = sessionStorage.getItem('currentHeadacheId');
+
+            // Fetch and display pain level description
+            fetchPainLevelDescription(level);
 
             // Remove 'active' class from all buttons
             document.querySelectorAll('.pain-level-button').forEach(function(button) {
@@ -104,6 +110,23 @@ $symptoms = $patient['symptoms'] ?? [];
             };
             xhr.send("data=" + encodeURIComponent(JSON.stringify(data)));
         }
+
+        function fetchPainLevelDescription(level) {
+            var painLevelDescription = document.getElementById('pain-level-description');
+
+            // Fetch pain level descriptions
+            fetch('pain.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Find the description matching the selected level
+                    var levelDescription = data.levels.find(l => l.value === level)?.description || 'Description not found';
+                    
+                    // Update the pain level description display
+                    painLevelDescription.textContent = 'Pain Level ' + level + ': ' + levelDescription;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
         
         function startNewHeadache() {
             // Generate a unique headache ID

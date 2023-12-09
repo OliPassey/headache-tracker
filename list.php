@@ -4,7 +4,7 @@
 require 'vendor/autoload.php';
 
 // Your MongoDB connection setup (similar to report.php)
-$configJson = file_get_contents('config.json');
+$configJson = file_get_contents('conf/config.json');
 $config = json_decode($configJson, true);
 
 $mongoDBConfig = $config['MongoDB'];
