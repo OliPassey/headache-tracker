@@ -3,7 +3,15 @@ A tracking solution for Cluster Headache Sufferers
 I often under report my headaches due to the nature of the condition, this app aims to increase accuracy and server as a companion app for patients and carers alike. I aim to add export features so data can easily be taken to medical appointments.
 
 ## Install  
-Pull this docker container "olipassey/cluster-tracker"  
+- Install XAMPP or another PHP Enabled WebServer
+- Download / Clone this repo into a cluster folder within the webserver (c:\xampp\htdocs\clusters\ for example)
+- Download & Install Composer https://getcomposer.org/download/ 
+- Using Windows Terminal (or other command line tool) navigate to the extracted directory and run "composer install" (no quotes)
+- Download & Install MongoDB https://www.mongodb.com/try/download/community
+- Check the web-browser is started and running, navigate to http://localhost/clusters/
+
+## Docker
+Although published on my docker hub, the app does not function correctly under docker at this time. I am working to resolve this asap.
 
 ## Current Requirements
 Web Server with PHP 8.1  
