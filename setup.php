@@ -109,14 +109,6 @@ if (isset($painConfigCreated) && $painConfigCreated) {
         Port: <input type="number" name="mongodb_port" required><br>
         Database: <input type="text" name="mongodb_database" required><br>
         Collection: <input type="text" name="mongodb_collection" required><br>
-
-        <h3>InfluxDB Configuration</h3>
-        Host: <input type="text" name="influxdb_host" required><br>
-        Port: <input type="number" name="influxdb_port" required><br>
-        User: <input type="text" name="influxdb_user" required><br>
-        Pass: <input type="password" name="influxdb_pass" required><br>
-        Database: <input type="text" name="influxdb_database" required><br>
-
         <input type="submit" name="createConfig" value="Create Config">
     </form>
 </body>
