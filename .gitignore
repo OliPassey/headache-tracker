@@ -129,5 +129,12 @@ public
 # Azure deployment files (if using Azure)
 .azure/
 
+# Windows Service files
+daemon/
+
+# Executable builds
+dist/
+*.exe
+
 # Local storage data (for privacy)
 localStorage.json
