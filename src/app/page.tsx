@@ -5,9 +5,10 @@ import { HeadacheEntry } from '@/types/headache';
 import HeadacheForm from '@/components/HeadacheForm';
 import Dashboard from '@/components/Dashboard';
 import HeadacheList from '@/components/HeadacheList';
-import { BarChart3, Plus, List, Menu, X, Brain, Activity } from 'lucide-react';
+import DataManagement from '@/components/DataManagement';
+import { BarChart3, Plus, List, Menu, X, Brain, Activity, Database } from 'lucide-react';
 
-type View = 'dashboard' | 'log' | 'history';
+type View = 'dashboard' | 'log' | 'history' | 'data';
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>('dashboard');
@@ -40,6 +41,13 @@ export default function Home() {
   useEffect(() => {
     if (entries.length > 0) {
       localStorage.setItem('headache-entries', JSON.stringify(entries));
+      // Create automatic backup
+      const backup = {
+        timestamp: new Date().toISOString(),
+        entries: entries
+      };
+      localStorage.setItem('headache-entries-backup', JSON.stringify(backup));
+      localStorage.setItem('headache-entries-last-saved', new Date().toISOString());
     }
   }, [entries]);
 
@@ -83,6 +91,7 @@ export default function Home() {
     { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
     { id: 'log', name: 'Log Headache', icon: Plus },
     { id: 'history', name: 'History', icon: List },
+    { id: 'data', name: 'Data Management', icon: Database },
   ];
 
   return (
@@ -209,6 +218,12 @@ export default function Home() {
               entries={entries} 
               onEdit={handleEditEntry} 
               onDelete={handleDeleteEntry} 
+            />
+          )}
+          {currentView === 'data' && (
+            <DataManagement 
+              entries={entries} 
+              onDataImported={setEntries} 
             />
           )}
         </main>
