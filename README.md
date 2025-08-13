@@ -1,18 +1,163 @@
-# headache-tracker
-A tracking solution for Cluster Headache Sufferers
+# HeadacheTracker
 
-You will need:
-Working Web Server that supports PHP
-InfluxDB Server
-Grafana 5+
+A comprehensive web application for tracking migraine and cluster headache episodes, identifying patterns, and managing symptoms.
 
-You will need to configure the InfluxDB Database, i use 'telegraf' as it already exists.
-You must secure your influxdb server! Do not open it to the internet without understanding what you are doing!
+## Features
 
-<<<<<<< Updated upstream
-![image](https://github.com/OliPassey/headache-tracker/assets/7745805/f48381f5-0e5f-4742-8e2a-77561b2082ea)
-=======
-## Planned Updates:
-The code-base is currently a mess, but it works.
-I will be implementibg Ajax, and shrinking the code into one file eventually.
->>>>>>> Stashed changes
+### 📊 **Analytics Dashboard**
+- Comprehensive statistics and insights
+- Monthly trend analysis
+- Pain level distribution charts
+- Most common triggers and symptoms
+- Duration analysis and patterns
+- Visual charts and graphs
+
+### 📝 **Detailed Logging**
+- Log both migraine and cluster headaches
+- Track pain levels (1-10 scale)
+- Record detailed symptoms and locations
+- Monitor potential triggers
+- Document medications and relief methods
+- Weather information tracking
+- Migraine-specific features:
+  - Aura tracking (visual, sensory, speech)
+  - Prodrome symptoms
+  - Postdrome symptoms
+- Cluster headache-specific features:
+  - Cluster period tracking
+  - Eye-related symptoms
+  - Restlessness indicators
+
+### 📱 **Mobile-Responsive Design**
+- Optimized for phone, tablet, and desktop use
+- Touch-friendly interface
+- Quick access to logging features
+- Mobile menu navigation
+
+### 📈 **Pattern Recognition**
+- Identify common triggers
+- Track symptom patterns
+- Monitor medication effectiveness
+- Analyze duration trends
+- Seasonal pattern detection
+
+## Research-Based Tracking Fields
+
+Based on medical research from Mayo Clinic and headache specialists, the app tracks:
+
+### **Common Triggers**
+- Food triggers (aged cheese, chocolate, alcohol, MSG, etc.)
+- Environmental factors (bright lights, weather changes, barometric pressure)
+- Hormonal changes (menstruation, contraceptives, menopause)
+- Lifestyle factors (sleep changes, stress, exercise)
+- Physical triggers (neck tension, eye strain)
+
+### **Comprehensive Symptoms**
+- Pain characteristics (throbbing, stabbing, burning)
+- Neurological symptoms (aura, confusion, coordination issues)
+- Autonomic symptoms (nausea, light/sound sensitivity)
+- Eye-related symptoms (tearing, redness, droopy eyelid)
+- Associated symptoms (mood changes, fatigue)
+
+### **Medications & Relief**
+- Acute/rescue medications (triptans, NSAIDs, etc.)
+- Preventive medications
+- Alternative relief methods
+- Effectiveness tracking
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18.18.0 or higher
+- Modern web browser
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd headache-tracker
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:3000`
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## Technology Stack
+
+- **Framework**: Next.js 15.1.3 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Date Handling**: date-fns
+- **Data Storage**: Local Storage (client-side)
+
+## Usage
+
+### 1. Dashboard
+- View comprehensive analytics and insights
+- Monitor trends and patterns
+- Quick overview of recent activity
+
+### 2. Log Headache
+- Record new headache episodes
+- Fill in detailed information about symptoms, triggers, and treatments
+- Choose between migraine and cluster headache types
+- Add weather information and notes
+
+### 3. History
+- Browse all logged episodes
+- Search and filter entries
+- Edit or delete existing records
+- View detailed information for each episode
+
+## Data Privacy
+
+All data is stored locally in your browser's local storage. No data is sent to external servers, ensuring complete privacy of your health information.
+
+## Contributing
+
+This application was designed specifically for migraine and cluster headache sufferers. If you'd like to contribute improvements or additional features, please:
+
+1. Ensure medical accuracy of any new tracking fields
+2. Maintain mobile-responsive design
+3. Follow existing code patterns and styling
+4. Test thoroughly across different devices
+
+## Medical Disclaimer
+
+This application is for personal tracking and pattern identification only. It is not a medical diagnostic tool and should not replace professional medical advice. Always consult with healthcare professionals for proper diagnosis and treatment of headache disorders.
+
+## Future Enhancements
+
+Potential future features:
+- Data export functionality (CSV, PDF reports)
+- Reminder notifications for medication
+- Trigger prediction based on patterns
+- Integration with weather APIs
+- Sharing capabilities with healthcare providers
+- Advanced analytics and machine learning insights
+
+## License
+
+This project is designed for personal use in managing headache conditions.
+
+---
+
+**Important**: If you experience sudden severe headaches, changes in headache patterns, or headaches with fever, confusion, or neurological symptoms, seek immediate medical attention.
