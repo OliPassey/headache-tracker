@@ -75,7 +75,7 @@ Weather changes are a common migraine trigger. Automatic capture helps identify:
 ## Privacy & Security
 
 ### Data Protection
-- **Local Storage**: Weather data stored in your local database only
+- **Local Database**: Weather data stored in your local SQLite database only
 - **No Cloud Sync**: Weather information never leaves your computer
 - **API Key Security**: Keep your API key private and secure
 - **Location Privacy**: Geolocation used only when you permit it

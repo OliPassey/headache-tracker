@@ -136,10 +136,12 @@ If port 3000 is in use, you can change it:
 
 ## Data Location
 
-Your headache tracking data is stored locally in:
-- Browser Local Storage (per user)
-- No data is sent to external servers
-- Completely private and secure
+Your headache tracking data is stored in:
+- **SQLite database**: `data/headache_tracker.db` in the application folder
+- **Centralized storage**: All entries in a single, portable database file
+- **No external servers**: Data remains completely local and private
+- **Multi-device access**: Access from any device on your local network
+- **Backup-friendly**: Simple single-file database for easy backup
 
 ## Uninstalling
 

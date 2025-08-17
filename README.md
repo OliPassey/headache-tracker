@@ -5,12 +5,13 @@ A comprehensive web application for tracking migraine and cluster headache episo
 ## Features
 
 ### 📊 **Analytics Dashboard**
+- **GitHub-style headache heatmap** - Visual year-at-a-glance activity calendar
 - Comprehensive statistics and insights
 - Monthly trend analysis
 - Pain level distribution charts
 - Most common triggers and symptoms
 - Duration analysis and patterns
-- Visual charts and graphs
+- Visual charts and graphs for pattern recognition
 
 ### 📝 **Detailed Logging**
 - Log both migraine and cluster headaches
@@ -69,7 +70,7 @@ Based on medical research from Mayo Clinic and headache specialists, the app tra
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18.18.0 or higher
+- Node.js 16.20.0 or higher (Note: Next.js 13.5.6 requires Node.js 16+)
 - Modern web browser
 
 ### Installation
@@ -109,13 +110,14 @@ npm start
 
 ## Technology Stack
 
-- **Framework**: Next.js 15.1.3 with App Router
+- **Framework**: Next.js 13.5.6 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Charts**: Recharts
 - **Icons**: Lucide React
 - **Date Handling**: date-fns
-- **Data Storage**: Local Storage (client-side)
+- **Database**: SQLite3 with centralized storage
+- **Weather API**: OpenWeatherMap integration
 
 ## Usage
 
@@ -136,9 +138,19 @@ npm start
 - Edit or delete existing records
 - View detailed information for each episode
 
-## Data Privacy
+## Data Privacy & Storage
 
-All data is stored locally in your browser's local storage. No data is sent to external servers, ensuring complete privacy of your health information.
+**Centralized SQLite Database:**
+- All data stored in `data/headache_tracker.db` in the application folder
+- Single database file for easy backup and migration
+- No data sent to external servers
+- Complete privacy of your health information
+- Multi-device access when deployed as a service on your local network
+
+**Migration from Browser Storage:**
+- Automatic migration from localStorage to database on first use
+- All existing data preserved during transition
+- Improved data persistence and reliability
 
 ## Contributing
 
