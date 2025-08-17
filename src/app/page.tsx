@@ -96,7 +96,7 @@ export default function Home() {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}>
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:translate-x-0`}>
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div className="flex items-center space-x-2">
             <Brain className="h-8 w-8 text-primary-600" />
@@ -137,7 +137,16 @@ export default function Home() {
         </nav>
 
         {/* Stats Summary in Sidebar */}
+        {/* App Info - moved above Quick Stats to prevent overlap */}
         <div className="mt-8 px-4">
+          <div className="text-xs text-gray-500 text-center mb-4">
+            <p>Track patterns • Identify triggers</p>
+            <p>Manage your headaches better</p>
+          </div>
+        </div>
+
+        {/* Quick Stats */}
+        <div className="px-4 pb-6">
           <div className="bg-gray-50 rounded-lg p-4">
             <h3 className="text-sm font-medium text-gray-900 mb-3">Quick Stats</h3>
             <div className="space-y-2">
@@ -166,14 +175,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* App Info */}
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="text-xs text-gray-500 text-center">
-            <p>Track patterns • Identify triggers</p>
-            <p>Manage your headaches better</p>
-          </div>
-        </div>
       </div>
 
       {/* Main Content */}
@@ -196,7 +197,7 @@ export default function Home() {
         </div>
 
         {/* Page Content */}
-        <main className="min-h-screen">
+        <main className="py-6">
           {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 m-6">
