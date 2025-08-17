@@ -18,7 +18,8 @@ A comprehensive web application for tracking migraine and cluster headache episo
 - Record detailed symptoms and locations
 - Monitor potential triggers
 - Document medications and relief methods
-- Weather information tracking
+- **Automatic weather capture** with location detection
+- **Manual weather entry** for offline use
 - Migraine-specific features:
   - Aura tracking (visual, sensory, speech)
   - Prodrome symptoms
@@ -84,7 +85,15 @@ Based on medical research from Mayo Clinic and headache specialists, the app tra
    npm install
    ```
 
-3. Start the development server:
+3. **(Optional)** Set up automatic weather capture:
+   - Get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
+   - Create a `.env.local` file in the project root:
+     ```
+     NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
+     ```
+   - See [WEATHER-SETUP.md](WEATHER-SETUP.md) for detailed instructions
+
+4. Start the development server:
    ```bash
    npm run dev
    ```

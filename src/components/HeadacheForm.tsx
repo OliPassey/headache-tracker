@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { HeadacheEntry } from '@/types/headache';
 import { TRIGGER_OPTIONS, SYMPTOM_OPTIONS, LOCATION_OPTIONS, MEDICATION_OPTIONS, RELIEF_OPTIONS } from '@/data/options';
 import { Calendar, Clock, MapPin, Zap, Pill, Heart, Thermometer, StickyNote } from 'lucide-react';
+import WeatherCapture from './WeatherCapture';
+import { WeatherData } from '@/services/weatherService';
 
 interface HeadacheFormProps {
   onSubmit: (entry: Omit<HeadacheEntry, 'id'>) => void;
@@ -37,14 +39,10 @@ export default function HeadacheForm({ onSubmit, onCancel, initialData }: Headac
     expectedClusterEnd: initialData?.clusterPeriod?.expectedEnd ? initialData.clusterPeriod.expectedEnd.toISOString().split('T')[0] : '',
     eyeSymptoms: initialData?.eyeSymptoms || [] as string[],
     restlessness: initialData?.restlessness || false,
-    weather: {
-      temperature: initialData?.weather?.temperature?.toString() || '',
-      humidity: initialData?.weather?.humidity?.toString() || '',
-      pressure: initialData?.weather?.pressure?.toString() || '',
-      condition: initialData?.weather?.condition || ''
-    },
     notes: initialData?.notes || ''
   });
+
+  const [weatherData, setWeatherData] = useState<WeatherData | undefined>(initialData?.weather);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,11 +62,11 @@ export default function HeadacheForm({ onSubmit, onCancel, initialData }: Headac
       medications: formData.medications,
       relief: formData.relief,
       notes: formData.notes || undefined,
-      weather: formData.weather.temperature ? {
-        temperature: parseFloat(formData.weather.temperature),
-        humidity: parseFloat(formData.weather.humidity),
-        pressure: parseFloat(formData.weather.pressure),
-        condition: formData.weather.condition
+      weather: weatherData ? {
+        temperature: weatherData.temperature,
+        humidity: weatherData.humidity,
+        pressure: weatherData.pressure,
+        condition: weatherData.condition
       } : undefined,
     };
 
@@ -556,75 +554,10 @@ export default function HeadacheForm({ onSubmit, onCancel, initialData }: Headac
         </div>
 
         {/* Weather Information */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
-            <Thermometer className="inline w-4 h-4 mr-1" />
-            Weather Information (Optional)
-          </label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Temperature (°F)</label>
-              <input
-                type="number"
-                className="input-field"
-                value={formData.weather.temperature}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  weather: { ...prev.weather, temperature: e.target.value }
-                }))}
-                placeholder="70"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Humidity (%)</label>
-              <input
-                type="number"
-                className="input-field"
-                value={formData.weather.humidity}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  weather: { ...prev.weather, humidity: e.target.value }
-                }))}
-                placeholder="60"
-                min="0"
-                max="100"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Pressure (inHg)</label>
-              <input
-                type="number"
-                step="0.01"
-                className="input-field"
-                value={formData.weather.pressure}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  weather: { ...prev.weather, pressure: e.target.value }
-                }))}
-                placeholder="30.15"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Condition</label>
-              <select
-                className="input-field"
-                value={formData.weather.condition}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  weather: { ...prev.weather, condition: e.target.value }
-                }))}
-              >
-                <option value="">Select...</option>
-                <option value="sunny">Sunny</option>
-                <option value="cloudy">Cloudy</option>
-                <option value="rainy">Rainy</option>
-                <option value="stormy">Stormy</option>
-                <option value="foggy">Foggy</option>
-                <option value="windy">Windy</option>
-              </select>
-            </div>
-          </div>
-        </div>
+        <WeatherCapture
+          onWeatherChange={setWeatherData}
+          initialWeather={weatherData}
+        />
 
         {/* Notes */}
         <div>

@@ -4,6 +4,7 @@ import { HeadacheEntry, DashboardStats } from '@/types/headache';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import { Calendar, TrendingUp, Activity, Clock, Target, AlertTriangle } from 'lucide-react';
 import { format, startOfMonth, endOfMonth, eachMonthOfInterval, subMonths } from 'date-fns';
+import HeadacheHeatmap from './HeadacheHeatmap';
 
 interface DashboardProps {
   entries: HeadacheEntry[];
@@ -79,6 +80,9 @@ export default function Dashboard({ entries }: DashboardProps) {
           </div>
         </div>
       </div>
+
+      {/* Headache Activity Heatmap */}
+      <HeadacheHeatmap entries={entries} />
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -252,7 +256,7 @@ export default function Dashboard({ entries }: DashboardProps) {
           <div className="p-4 bg-gray-50 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-2">Tracking Progress</h4>
             <p className="text-sm text-gray-800">
-              You've logged {stats.totalEntries} episodes. Consistent tracking helps identify patterns 
+              You&apos;ve logged {stats.totalEntries} episodes. Consistent tracking helps identify patterns 
               and triggers to better manage your headaches.
             </p>
           </div>

@@ -335,8 +335,8 @@ export default function HeadacheList({ entries, onEdit, onDelete }: HeadacheList
               {/* Weather info */}
               {entry.weather && (
                 <div className="mt-3 text-xs text-gray-600">
-                  <strong>Weather:</strong> {entry.weather.condition} {entry.weather.temperature}°F, 
-                  {entry.weather.humidity}% humidity, {entry.weather.pressure}" pressure
+                  <strong>Weather:</strong> {entry.weather.condition} {entry.weather.temperature}°C, 
+                  {entry.weather.humidity}% humidity, {entry.weather.pressure} hPa pressure
                 </div>
               )}
             </div>

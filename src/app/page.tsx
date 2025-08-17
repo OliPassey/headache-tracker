@@ -6,6 +6,7 @@ import HeadacheForm from '@/components/HeadacheForm';
 import Dashboard from '@/components/Dashboard';
 import HeadacheList from '@/components/HeadacheList';
 import DataManagement from '@/components/DataManagement';
+import { headacheDataService } from '@/services/headacheDataService';
 import { BarChart3, Plus, List, Menu, X, Brain, Activity, Database } from 'lucide-react';
 
 type View = 'dashboard' | 'log' | 'history' | 'data';
@@ -15,60 +16,46 @@ export default function Home() {
   const [entries, setEntries] = useState<HeadacheEntry[]>([]);
   const [editingEntry, setEditingEntry] = useState<HeadacheEntry | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load entries from localStorage on component mount
+  // Load entries from database on component mount
   useEffect(() => {
-    const storedEntries = localStorage.getItem('headache-entries');
-    if (storedEntries) {
-      try {
-        const parsedEntries = JSON.parse(storedEntries).map((entry: any) => ({
-          ...entry,
-          date: new Date(entry.date),
-          clusterPeriod: entry.clusterPeriod ? {
-            ...entry.clusterPeriod,
-            periodStart: entry.clusterPeriod.periodStart ? new Date(entry.clusterPeriod.periodStart) : undefined,
-            expectedEnd: entry.clusterPeriod.expectedEnd ? new Date(entry.clusterPeriod.expectedEnd) : undefined
-          } : undefined
-        }));
-        setEntries(parsedEntries);
-      } catch (error) {
-        console.error('Error parsing stored entries:', error);
-      }
-    }
+    loadEntries();
   }, []);
 
-  // Save entries to localStorage whenever entries change
-  useEffect(() => {
-    if (entries.length > 0) {
-      localStorage.setItem('headache-entries', JSON.stringify(entries));
-      // Create automatic backup
-      const backup = {
-        timestamp: new Date().toISOString(),
-        entries: entries
-      };
-      localStorage.setItem('headache-entries-backup', JSON.stringify(backup));
-      localStorage.setItem('headache-entries-last-saved', new Date().toISOString());
+  const loadEntries = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await headacheDataService.getAllEntries();
+      setEntries(data);
+    } catch (err) {
+      console.error('Error loading entries:', err);
+      setError('Failed to load headache entries');
+    } finally {
+      setLoading(false);
     }
-  }, [entries]);
+  };
 
-  const handleSubmitEntry = (newEntry: Omit<HeadacheEntry, 'id'>) => {
-    if (editingEntry) {
-      // Update existing entry
-      setEntries(prev => prev.map(entry => 
-        entry.id === editingEntry.id 
-          ? { ...newEntry, id: editingEntry.id }
-          : entry
-      ));
-      setEditingEntry(null);
-    } else {
-      // Add new entry
-      const entry: HeadacheEntry = {
-        ...newEntry,
-        id: Date.now().toString()
-      };
-      setEntries(prev => [...prev, entry]);
+  const handleSubmitEntry = async (newEntry: Omit<HeadacheEntry, 'id'>) => {
+    try {
+      if (editingEntry) {
+        // Update existing entry
+        await headacheDataService.updateEntry(editingEntry.id, newEntry);
+        setEditingEntry(null);
+      } else {
+        // Add new entry
+        await headacheDataService.createEntry(newEntry);
+      }
+      
+      // Reload entries from database
+      await loadEntries();
+      setCurrentView('dashboard');
+    } catch (error) {
+      console.error('Error saving entry:', error);
+      setError('Failed to save headache entry');
     }
-    setCurrentView('dashboard');
   };
 
   const handleEditEntry = (entry: HeadacheEntry) => {
@@ -76,9 +63,16 @@ export default function Home() {
     setCurrentView('log');
   };
 
-  const handleDeleteEntry = (id: string) => {
+  const handleDeleteEntry = async (id: string) => {
     if (confirm('Are you sure you want to delete this entry?')) {
-      setEntries(prev => prev.filter(entry => entry.id !== id));
+      try {
+        await headacheDataService.deleteEntry(id);
+        // Reload entries from database
+        await loadEntries();
+      } catch (error) {
+        console.error('Error deleting entry:', error);
+        setError('Failed to delete headache entry');
+      }
     }
   };
 
@@ -203,28 +197,59 @@ export default function Home() {
 
         {/* Page Content */}
         <main className="min-h-screen">
-          {currentView === 'dashboard' && <Dashboard entries={entries} />}
-          {currentView === 'log' && (
-            <div className="p-6">
-              <HeadacheForm 
-                onSubmit={handleSubmitEntry} 
-                onCancel={handleCancelForm}
-                initialData={editingEntry || undefined}
-              />
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 m-6">
+              <div className="text-red-700">{error}</div>
+              <button 
+                onClick={() => setError(null)}
+                className="mt-2 text-sm text-red-600 underline"
+              >
+                Dismiss
+              </button>
             </div>
           )}
-          {currentView === 'history' && (
-            <HeadacheList 
-              entries={entries} 
-              onEdit={handleEditEntry} 
-              onDelete={handleDeleteEntry} 
-            />
+
+          {/* Loading State */}
+          {loading && (
+            <div className="flex items-center justify-center min-h-96">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                <p className="mt-4 text-gray-600">Loading headache data...</p>
+              </div>
+            </div>
           )}
-          {currentView === 'data' && (
-            <DataManagement 
-              entries={entries} 
-              onDataImported={setEntries} 
-            />
+
+          {/* Main Content */}
+          {!loading && (
+            <>
+              {currentView === 'dashboard' && <Dashboard entries={entries} />}
+              {currentView === 'log' && (
+                <div className="p-6">
+                  <HeadacheForm 
+                    onSubmit={handleSubmitEntry} 
+                    onCancel={handleCancelForm}
+                    initialData={editingEntry || undefined}
+                  />
+                </div>
+              )}
+              {currentView === 'history' && (
+                <HeadacheList 
+                  entries={entries} 
+                  onEdit={handleEditEntry} 
+                  onDelete={handleDeleteEntry} 
+                />
+              )}
+              {currentView === 'data' && (
+                <DataManagement 
+                  entries={entries} 
+                  onDataImported={(newEntries) => {
+                    setEntries(newEntries);
+                    loadEntries(); // Refresh from database
+                  }} 
+                />
+              )}
+            </>
           )}
         </main>
       </div>
